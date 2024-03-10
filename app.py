@@ -2,6 +2,8 @@ import pathlib
 import os
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+
+from apis import router_simple
 from exts.exceptions import ApiExceptionHandler
 from fastapi.openapi.docs import get_swagger_ui_html
 from starlette.staticfiles import StaticFiles
@@ -69,6 +71,7 @@ app.add_middleware(BindContextvarMiddleware)
 
 # 路由设置
 app.include_router(router_user)
+app.include_router(router_simple)
 
 
 if __name__ == "__main__":

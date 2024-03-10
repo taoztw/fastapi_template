@@ -142,7 +142,10 @@ class LogerMiddleware:
 
     async def make_request_log_msg(self, request) -> typing.Dict:
         # 从当前请求中获取到具体的客户端信息
-        ip, method, url = request.client.host, request.method, request.url.path
+        try:
+            ip, method, url = request.client.host, request.method, request.url.path
+        except:
+            ip, method, url = "", request.method, request.url.path
         # 解析请求提交的表单信息
         try:
             body_form = await request.form()
